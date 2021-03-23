@@ -10,7 +10,7 @@ import requests
 from urllib.parse import quote
 
 mongo_client = pymongo.MongoClient(
-    "mongodb://127.0.0.1:27017/?authSource=admin")
+    "mongodb://root:wsqtZ369*@119.28.19.237:27017/?authSource=admin")
 db = mongo_client["monitor"]
 col = db["sites"]
 

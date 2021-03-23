@@ -36,12 +36,20 @@
     {% endfor %}
   </ul>
     <script>
-      var keyInput = document.getElementById('key')
-      var params = location.href.split("?")[1].split("&")
       var query = {}
-      params.map(v => query[v.split("=")[0]] = v.split("=")[1])
-
-      keyInput.value = query.key
+      var keyInput = document.getElementById('key')
+      try {
+        var params = location.href.split("?")[1].split("&")
+        params.map(v => query[v.split("=")[0]] = v.split("=")[1])
+      } catch (error) {
+        document.body.innerHTML = "<h1>网址上没有key</h1>"
+      }
+      
+      if (!!query) {
+        keyInput.value = query.key
+      } else {
+        document.body.innerHTML="<h1>网址上没有key</h1>"
+      }
     </script>
 </body>
 </html>
