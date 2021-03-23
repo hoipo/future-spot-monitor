@@ -50,7 +50,7 @@ def check_delta():
         print(e)
 
 
-schedule.every(10).seconds.do(check_delta)
+schedule.every(60).seconds.do(check_delta)
 run_continuously(schedule)
 
 
