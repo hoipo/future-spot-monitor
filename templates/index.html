@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>期现套利监控</title>
+</head>
+<body>
+  <form action="/add_alert" method="post">
+    <p>
+      <label for="future">期货代码 <input type="text" name="future" id="future" placeholder="IC0"></label>
+    </p>
+    <p>
+      <label for="spot">现货代码 <input type="text" name="spot" id="spot" placeholder="sh000905"></label>
+    </p>
+    <p>
+      <label for="delta">基差 <input type="number" name="delta" id="delta"></label>
+    </p>
+    <p>
+      <label hidden for="key">Bark pushKey <input type="text" name="key" id="key"></label>
+    </p>
+    <p>
+      <input type="submit" value="提交">
+    </p>
+      <hr>
+      <p><em>期货代码为IF0，IF2104等中国金融交易所的指数期货代码</em></p>
+      <p><em>现货代码为新浪查询到的指数代码，比如<a href="https://finance.sina.com.cn/realstock/company/sh000905/nc.shtml">https://finance.sina.com.cn/realstock/company/sh000905/nc.shtml</a>里面的sh000905</em></p>
+  </form>
+
+  <hr>
+  <h2>待触发提醒</h2>
+  <ul>
+    {% for item in list %}
+    <li>id: {{item._id}}, 期货：{{item.future}}，现货：{{item.spot}}, 基差：{{item.delta}} <a href="/delete_alert?id={{item._id}}">删除</a></li>
+    {% endfor %}
+  </ul>
+    <script>
+      var keyInput = document.getElementById('key')
+      var params = location.href.split("?")[1].split("&")
+      var query = {}
+      params.map(v => query[v.split("=")[0]] = v.split("=")[1])
+
+      keyInput.value = query.key
+    </script>
+</body>
+</html>
